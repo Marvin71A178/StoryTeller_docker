@@ -1,0 +1,2 @@
+cd music_creater
+sudo docker build -t music_creater_train .
