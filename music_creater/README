@@ -1,2 +1,3 @@
 cd music_creater
-sudo docker build -t music_creater_train .
+sudo docker build -t music_generate_1120 . (--no-cache)
+sudo docker run --gpus all -it --name generate_bash_1120 -v /home/marvin/doc_storyteller/StoryTeller_docker/music_creater/:/music_creater/ music_generate_1120 bash
