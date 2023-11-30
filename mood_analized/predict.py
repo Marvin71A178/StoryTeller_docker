@@ -5,7 +5,7 @@ import time
 # 預測情緒
 def predict(listTestData):
     # 輸出模型存在的目錄名稱
-    dir_name = 'bert-base-chinese-bs-64-epo-3/checkpoint-20000' 
+    dir_name = './checkpoint-20000' 
 
     # 自訂參數
     model_args = ClassificationArgs()
@@ -15,7 +15,7 @@ def predict(listTestData):
     # 讀取 ClassificationModel
     model = ClassificationModel(
         'bert', 
-        f"outputs/{dir_name}", # 這裡要改成訓練完成的模型資料夾路徑
+        f"{dir_name}", # 這裡要改成訓練完成的模型資料夾路徑
         use_cuda=True, 
         cuda_device=0, 
         num_labels=6, 
@@ -28,6 +28,10 @@ def predict(listTestData):
     # 回傳預測結果，會是一個 list
     return predictions
 
+def mood_ana_api(input_string):
+    Data = [input_string]
+    return int(predict(input_string)[0])
+    
 
 # 主程式
 if __name__ == "__main__":
@@ -43,8 +47,8 @@ if __name__ == "__main__":
     ]
 
     # 進行預測
-    print( predict(listTestData) )
-
+    test = predict(listTestData)
+    print(type(int(test[0])))
     # 計時結束
     tEnd = time.time()
 
