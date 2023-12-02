@@ -48,6 +48,7 @@ if __name__ == "__main__":
 
     # 進行預測
     test = predict(listTestData)
+    print(test)
     print(type(int(test[0])))
     # 計時結束
     tEnd = time.time()
