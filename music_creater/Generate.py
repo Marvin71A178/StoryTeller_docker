@@ -141,6 +141,8 @@ def gen_music():
         
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
+    
+    return f'sample{mv_file_name}.wav'
 
 if __name__ == '__main__' :
     gen_music()
