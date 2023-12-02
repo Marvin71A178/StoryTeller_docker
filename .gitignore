@@ -3,3 +3,6 @@ music_creater/compound-word-transformer/dataset/
 music_creater/compound-word-transformer/workspace/uncond/cp-linear/exp/
 mood_analized/Simpletransformer/dataset/
 mood_analized/Simpletransformer/train.json
+
+# env
+mood_analized/myenv
