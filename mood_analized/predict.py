@@ -16,7 +16,7 @@ def predict(listTestData):
     model = ClassificationModel(
         'bert', 
         f"{dir_name}", # 這裡要改成訓練完成的模型資料夾路徑
-        use_cuda=True, 
+        use_cuda=False, 
         cuda_device=0, 
         num_labels=6, 
         args=model_args
@@ -48,6 +48,7 @@ if __name__ == "__main__":
 
     # 進行預測
     test = predict(listTestData)
+    print(test)
     print(type(int(test[0])))
     # 計時結束
     tEnd = time.time()

@@ -3,6 +3,15 @@ music_creater/compound-word-transformer/dataset/
 music_creater/compound-word-transformer/workspace/uncond/cp-linear/exp/
 mood_analized/Simpletransformer/dataset/
 mood_analized/Simpletransformer/train.json
-
 # env
 mood_analized/myenv
+
+model/
+mood_analized/checkpoint-20000/
+music_creater/loss_30_params.pt
+music_creater/compound-word-transformer/__MACOSX/
+music_creater/__pycache__/
+*.cpy
+*.mid
+*.wav
+*.sf2

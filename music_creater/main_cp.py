@@ -37,7 +37,7 @@ MODE = 'train'
 # MODE = 'inference' 
 
 ###--- data ---###
-path_data_root = '..../dataset/representations/uncond/cp/ailab17k_from-scratch_cp'
+path_data_root = '/music_creater/compound-word-transformer/dataset/representations/uncond/cp/ailab17k_from-scratch_cp'
 path_train_data = os.path.join(path_data_root, 'train_data_linear.npz')
 path_dictionary =  os.path.join(path_data_root, 'dictionary.pkl')
 
@@ -59,7 +59,7 @@ init_lr = 0.0001
 # )
 info_load_model = None
 path_gendir = 'gen_midis'
-num_songs = 50
+num_songs = 1
 
 ################################################################################
 # File IO
