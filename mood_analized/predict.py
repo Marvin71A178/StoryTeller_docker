@@ -5,7 +5,7 @@ import time
 # 預測情緒
 def predict(listTestData):
     # 輸出模型存在的目錄名稱
-    dir_name = './checkpoint-20000' 
+    dir_name = './mood_analized/checkpoint-20000' 
 
     # 自訂參數
     model_args = ClassificationArgs()

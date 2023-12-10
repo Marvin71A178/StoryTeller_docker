@@ -5,6 +5,7 @@ from pydantic import BaseModel
 import predict
 import uvicorn
 import argparse
+import psutil
 from dotenv import load_dotenv
 import os
 
@@ -27,7 +28,7 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -39,6 +40,16 @@ app.add_middleware(
 def root() -> object:
   return {"hello": "world!"}
 
+@app.get("/resources")
+def get_resource_usage():
+    cpu_usage = psutil.cpu_percent(interval=1)
+    memory_usage = psutil.virtual_memory().percent
+    disk_usage = psutil.disk_usage('/').percent
+    return {
+        "cpu_usage": cpu_usage,
+        "memory_usage": memory_usage,
+        "disk_usage": disk_usage
+    }
 
 async def process_emotion_ana(text):
   return predict.mood_ana_api(text)
@@ -53,20 +64,3 @@ async def mood_analyze_api(moodAnaLyzeModel: MoodAnaLyzeModel, request: Request)
     return HTTPException(status_code=400, detail="text is Null!")
   
   return await process_emotion_ana(moodAnaLyzeModel.text)
-
-
-# 開啟伺服器
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Mood analysis server')
-    
-    parser.add_argument(
-        '--reload', '-r', action='store_true',
-        help='Auto-reload server on filechanges (DEVELOPMENT)')
-    args = parser.parse_args()
-
-    reload_server = args.reload
-
-    if reload_server:
-        uvicorn.run("app:app", host="127.0.0.1", port=port, reload=True)
-    else:
-        uvicorn.run("app:app", host="127.0.0.1", port=port)

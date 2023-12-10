@@ -8,7 +8,7 @@ Original file is located at
 """
 import os
     # function to import all the functions in the main_cp
-from main_cp import *
+from .main_cp import *
 def set_gen_music():
     from IPython.display import clear_output
     import sys
@@ -34,8 +34,8 @@ def set_gen_music():
     MODE = 'train'
 
     ###--- data ---###
-    # path_data_root = './../../../dataset/representations/uncond/cp/ailab17k_from-scratch_cp'
-    path_data_root = '/music_creater/compound-word-transformer/dataset/representations/uncond/cp/ailab17k_from-scratch_cp'
+    path_data_root = '/home/marvin/StoryTeller_docker/music_creater/compound-word-transformer/dataset/representations/uncond/cp/ailab17k_from-scratch_cp'
+    # path_data_root = '/music_creater/compound-word-transformer/dataset/representations/uncond/cp/ailab17k_from-scratch_cp'
     path_train_data = os.path.join(path_data_root, 'train_data_linear.npz')
     path_test_data = os.path.join(path_data_root, 'test_data_linear.npz')
     path_dictionary =  os.path.join(path_data_root, 'dictionary.pkl')
@@ -128,7 +128,7 @@ def generate(info_load_model):
     with open('runtime_stats.json', 'w') as f:
         json.dump(runtime_result, f)
 
-def gen_music():
+def gen_music(li):
     set_gen_music()
     info_load_model = info_load_model = (".",'30')
     generate(info_load_model)
@@ -138,11 +138,10 @@ def gen_music():
         mv_file_name = str(datetime.datetime.now()).replace(" " , "_")
         subprocess.run(["mv", "gen_midis", f"gen_midis_loss_30_{mv_file_name}"], check=True)
         subprocess.run(["fluidsynth"  , "-ni", "FluidR3_GM.sf2" ,f"./gen_midis_loss_30_{mv_file_name}/get_0.mid", "-F" ,f'sample{mv_file_name}.wav' , "-r" ,"44100"], check=True)
-        
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
     
-    return f'sample{mv_file_name}.wav'
+    return f'./sample{mv_file_name}.wav'
 
 if __name__ == '__main__' :
     gen_music()

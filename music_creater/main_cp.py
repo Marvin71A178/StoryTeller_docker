@@ -26,7 +26,7 @@ from fast_transformers.masking import TriangularCausalMask
 import miditoolkit
 from miditoolkit.midi.containers import Marker, Instrument, TempoChange, Note
 
-import saver
+from .saver import *
 
 
 ################################################################################
@@ -37,7 +37,8 @@ MODE = 'train'
 # MODE = 'inference' 
 
 ###--- data ---###
-path_data_root = '/music_creater/compound-word-transformer/dataset/representations/uncond/cp/ailab17k_from-scratch_cp'
+path_data_root = '/home/marvin/StoryTeller_docker/music_creater/compound-word-transformer/dataset/representations/uncond/cp/ailab17k_from-scratch_cp'
+# path_data_root = '/music_creater/compound-word-transformer/dataset/representations/uncond/cp/ailab17k_from-scratch_cp'
 path_train_data = os.path.join(path_data_root, 'train_data_linear.npz')
 path_dictionary =  os.path.join(path_data_root, 'dictionary.pkl')
 
