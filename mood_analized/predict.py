@@ -3,10 +3,10 @@ import time
 
 
 # 預測情緒
-def predict(listTestData):
+def prediction(listTestData):
     # 輸出模型存在的目錄名稱
-    dir_name = './mood_analized/checkpoint-20000' 
-
+    # dir_name = './StoryTeller_docker/mood_analized/checkpoint-20000' 
+    dir_name = '/home/marvin/re_storyteller_docker/StoryTeller_docker/mood_analized/checkpoint-20000'
     # 自訂參數
     model_args = ClassificationArgs()
     model_args.train_batch_size = 64
@@ -16,7 +16,7 @@ def predict(listTestData):
     model = ClassificationModel(
         'bert', 
         f"{dir_name}", # 這裡要改成訓練完成的模型資料夾路徑
-        use_cuda=False, 
+        use_cuda=True, 
         cuda_device=0, 
         num_labels=6, 
         args=model_args
@@ -29,8 +29,9 @@ def predict(listTestData):
     return predictions
 
 def mood_ana_api(input_string):
-    Data = [input_string]
-    return int(predict(input_string)[0])
+    Data = [str(input_string)]
+    ans = int(prediction(Data)[0])
+    return ans
     
 
 # 主程式
@@ -47,11 +48,13 @@ if __name__ == "__main__":
     ]
 
     # 進行預測
-    test = predict(listTestData)
+    test = prediction(listTestData)
     print(test)
     print(type(int(test[0])))
     # 計時結束
     tEnd = time.time()
 
+
     # 輸出程式執行的時間
     print(f"執行花費 {tEnd - tStart} 秒。")
+    print(mood_ana_api('今天天氣真好'))

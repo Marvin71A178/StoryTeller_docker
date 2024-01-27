@@ -56,12 +56,11 @@ def get_resource_usage():
     }
 
 # Emotion Analysis Processing
-async def process_emotion_ana(text):
+async def process_emotion_ana(text: str):
     return predict.mood_ana_api(text)
 
 # Music Creation Processing
 async def process_music_creater(data: Dict[str, int]):
-    # Here add your logic to process music creation
     file_name = Generate.gen_music(data)  # Assuming gen_music accepts data parameter
     return file_name
 
@@ -89,9 +88,16 @@ async def mood_analyze_api(moodAnalyzeModel: MoodAnalyzeModel):
     if moodAnalyzeModel.text is None or moodAnalyzeModel.text == '':
         raise HTTPException(status_code=400, detail="text is Null!")
 
-    task = asyncio.create_task(process_emotion_ana(moodAnalyzeModel.text))
-    await task_queue.put(task)
-    return await task
+    # task = asyncio.create_task(process_emotion_ana(moodAnalyzeModel.text))
+    # await task_queue.put(task)
+    # return await task
+    print(moodAnalyzeModel.text)
+    try:
+        emtion_type = await process_emotion_ana(moodAnalyzeModel.text)
+    except Exception as e:
+        print(e)
+        emtion_type = 0
+    return emtion_type
 
 # Endpoint for music creation
 @app.post('/music_create')

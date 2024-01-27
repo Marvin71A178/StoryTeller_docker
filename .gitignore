@@ -5,7 +5,7 @@ mood_analized/Simpletransformer/dataset/
 mood_analized/Simpletransformer/train.json
 # env
 mood_analized/myenv
-
+downloads/
 model/
 mood_analized/checkpoint-20000/
 music_creater/loss_30_params.pt
